@@ -1,0 +1,964 @@
+<html>
+<head>
+
+
+<style>
+
+a				{color:windowtext;}
+
+
+select, input  	{font-family:tahoma;font-size:8pt;margin-top:3px;
+				text-decoration:none;} 
+
+td  			{font-family:tahoma;font-size:8pt;margin-top:3px;
+				text-decoration:none;} 
+
+.component		{font-size:8pt;font-weight:bold;text-decoration:none;
+				margin-left:15px;font-family:tahoma;color:windowtext;}
+
+
+.options		{color:#000000;font-family:Tahoma;font-size:8pt;text-decoration:none;}
+.date			{margin-bottom:5px;color:#000000;font-family:arial;
+			font-size:11pt;font-weight:bold; }
+
+
+.sort			{font-size:8pt;font-family:Tahoma;text-decoration:none;
+				font-style:normal;color:black; }
+
+.borderBottom  {
+		            border-color:#CCCCCC;
+		            border-width:1px;
+		            border-bottom-style:solid;
+		            border-top-style:none;
+		            border-right-style:none;
+		            border-left-style:none;
+               }
+.borderRight 		{ BORDER-RIGHT: rgb(192,192,192) 2px solid; color:#BFBFBF;}
+
+
+.button2         {
+         
+         position:relative;
+			height:100%;
+			text-decoration:none;
+			color: #00000;
+			font-weight: normal;
+         		font-size: 8pt;
+			font-family:tahoma;
+		  	border:none;
+		}
+.button2over       {
+			position:relative;
+			height:100%;
+			text-decoration:none;
+			color: #000000;
+         		font-size: 8pt;
+			font-family:tahoma;
+			font-weight: normal;
+		   	border:none;
+		}
+.button2down       {
+			position:relative;
+			height:100%;
+			font-family:tahoma;
+			font-size:8pt;
+			text-decoration:none;
+			color: #000000;
+			font-weight: normal;
+			border:none;
+		}
+
+
+</style>
+
+<script language="JavaScript">
+
+var strReturnURL = window.external.GetPref("CustomURL");
+
+if(strReturnURL)
+{
+	strReturnURL = "outlook:today?RelativeURL=" + strReturnURL;
+}
+else
+{
+	strReturnURL = "outlook:today";
+}
+
+</script>
+<OBJECT ID="Boot" CLASSID="CLSID:0468C085-CA5B-11D0-AF08-00609797F0E0">
+<PARAM NAME="Module" VALUE="Boot"></OBJECT>
+
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+
+<title>Outlook Today Options</title>
+
+</head>
+
+<body id=theBody style="margin-top:0;margin-left:0px;margin-right:0px;">
+<!-- BANNER DIV -->
+<TABLE border=0 cellPadding=0 cellSpacing=0 width=100% bgcolor=#FFFFFF style="border-bottom:1px solid #c0c0c0;">
+  <TR>
+    <TD height=30px noWrap valign=bottom>
+         <div id=OptionsDiv class=date style="margin-left:16px; margin-right:16px;">
+		Customize Outlook Today
+	</div>
+    </TD>
+    <TD id=align2 height=30px noWrap  valign=bottom align=right>
+<!-- BUTTONS START -->
+	<table border=0 cellpadding=1 id=topbuttons height=20px>
+		<tr>
+            <td valign=top>
+		<div id=btnSave class=button2  NOWRAP style="line-height:13pt;"
+		         onmousedown="btnSave.className ='button2down';"
+		         onmouseup="btnSave.className='button2over';">
+                	<a id=lnkSave class=options  href=""> 
+			   &nbsp;Save Changes&nbsp;
+                	</a>
+		</div> 
+           </td>
+           <td width=5px>&nbsp;</td>
+	   <td valign=top>
+		<div  id=btnCancel class=button2 NOWRAP style="line-height:13pt;"
+			onmousedown="btnCancel.className ='button2down';"
+			onmouseup="btnCancel.className='button2over';">
+                	<a id=lnkCancel  class=options href="" >
+			   &nbsp;Cancel&nbsp;
+                	</a>
+		</div>
+	    </td>
+            <td width=4px>&nbsp;</td>	
+        </tr>
+    </table>
+<!-- BUTTONS END    -->
+	   </TD>
+
+	</TR>
+</TABLE>
+
+<table border=0 cellspacing=0 style="height:60%;width:100%">
+	<tr>
+		<td width=14px class=borderBottom>&nbsp;</td>
+		<td id=custom_align1 class=borderBottom style="height:45px;width:20%"  align=left>
+			<table border=0 valign=top style="margin-left:0px; margin-top:0px;">
+				<tr>
+					<td id=StartupCell1 width=64px height=32px class="component" nowrap>
+						Startup
+					</td>
+				</tr>
+			</table>
+		</td>
+		<td class=borderBottom width=25px>&nbsp;</td>
+		<td class=borderBottom>
+			<table name="Boot" datasrc="#Boot" cellpadding=0 border=0 cellspacing=0>
+			    <tr>
+					<td id=StartupCell2>
+						<label for=cbStartup>
+						<INPUT id="cbStartup" TYPE=checkbox DATAFORMATAS="Text" DATAFLD="NoShow" onclick="cbStartupClick()">
+						When starting, go directly to Outlook Today
+						</label>
+					</td>
+				</tr>
+			</table>
+		</td>
+		
+	</tr>
+
+
+	<tr>
+		<td width=14px class=borderBottom>&nbsp;</td>
+		<td id=custom_align2 class=borderBottom style="width:20%;height:45px;" align="left">
+			<table border=0>
+				<tr>
+					<td id=MailCell1 width=64px height=32 class="component" NOWRAP>
+						Messages
+					</td>
+				</tr>
+			</table>
+		</td>
+		<td class=borderBottom width=25px>&nbsp;</td>
+		<td class=borderBottom nowrap>
+			<label id=MailCell2 >
+        		Show me these folders:&nbsp;
+			<input id=btnChooseFolders type=Button style="width:120px;" 
+			value="Choose Folders..."  onclick="window.external.PickEmailFolders();">
+			</label>
+		</td>
+
+	</tr>
+
+
+	<tr>
+		<td width=14px class=borderBottom>&nbsp;</td>
+		<td id=custom_align3 class=borderBottom style="width:20%;height:45px;" align=left>
+			<table border=0 style="margin-left:0px;">
+				<tr>
+
+					<td id=CalendarCell1 width=64px height=32px class="component" NOWRAP>
+						Calendar
+					</td>
+				</tr>
+			</table>
+		</td>
+		<td class=borderBottom width=25px>&nbsp;</td>
+		<td class=borderBottom>
+		<label id=CalendarCell2>
+		Show this number of days in my calendar
+		<select name="selShowCal" id="lbShowCal">
+			<option id=Option1 selected value="1">1
+			<option id=Option2 value="2">2
+			<option id=Option3 value="3">3
+			<option id=Option4 value="4">4
+			<option id=Option5 value="5">5
+			<option id=Option6 value="6">6
+			<option id=Option7 value="7">7
+		</select>
+		</label>
+
+		
+
+		</td>
+
+	</tr>
+
+
+	<tr>
+		<td width=14px>&nbsp;</td>
+		<td id=custom_align4 style="width:20%;height:45px;" valign=top align="left">
+			<table border=0 style="margin-left:0px;">
+				<tr>
+					<td id=TasksCell1 width=64px height=32px class="component" NOWRAP>
+					    Tasks
+					</td>
+				</tr>
+			</table> 
+		</td>
+		<td width=25px>&nbsp;</td>
+		<td id=idLocTasksAlign align="left">
+			<table border=0 cellpadding=0 cellspacing=0 style="margin-top:10px;">
+				<tr>
+					<td nowrap>
+					    <div id=TasksDiv1>
+						In my task list, show me:
+					    </div>
+					</td>
+					<td  valign=middle>
+						<input type=radio id="rbTaskAll" name="rbTasks" value="All" style="height:10px;"
+							onclick="gTaskFilter = this.value;TaskPrefsHandler()">
+					</td>
+					<td valign=bottom colspan=2>
+						&nbsp;<label  id=TasksCell2 for=rbTaskAll>All tasks</label>
+					</td>
+				</tr>
+				<tr>
+					<td rowspan=3>&nbsp;</td>
+					<td nowrap valign=middle>
+						<input type=radio id="rbTaskToday" name="rbTasks" value="Today" style="height:10px;"
+							onclick="gTaskFilter = this.value;TaskPrefsHandler()">
+					</td>
+					<td valign=bottom colspan=2>
+						&nbsp;<label id=TasksCell3 for=rbTaskToday>Today's tasks</label>
+					</td>
+				</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td  valign=middle >
+				<input type=CHECKBOX id="rbTaskIncludeNoDueDate" name="rbNoDueDate" style="height:14px;">
+			</td>
+			<td valign=bottom>
+			&nbsp;<label id=TasksCell4 for=rbTaskIncludeNoDueDate> Include tasks with no due date</label>
+			</td>
+                </tr>
+		<tr>
+			<td colspan=2>&nbsp;</td>
+                </tr>
+              </table>
+	      <table  border=0 cellpadding=0 cellspacing=0><tr><td>
+	         <table border=0 cellpadding=0 cellspacing=0>
+		    <tr>
+		       <td nowrap align=right>
+			  <div class=sort style="width:1px;">
+			     <label  id=TaskDivSort for=lbSort1>Sort my task list by:</label>&nbsp; 
+			  </div>
+                       </td>
+                       <td id=TaskCell5 colspan=2 >
+		          <select name="selShowSort1" id="lbSort1" onchange="SortHandler();">
+			     <option id=Sort10  selected value="~">(none)</option>
+			     <option id=Sort11  selected value="[Importance]">Importance</option>
+			     <option id=Sort12  value="[DueDate]">Due Date</option>
+			     <option id=Sort13  value="[CreationTime]">Creation Time</option>
+			     <option id=Sort14  value="[StartDate]">Start Date</option>
+			  </select>
+		       </td>
+		    </tr>
+		    <tr>
+		       <td rowspan=2>&nbsp;</td>                  
+		       <td  align=left valign=middle>
+ 		          <input type=RADIO id="rbTaskSort1Asc" style="height:10px;" name=constraint1>
+                       </td>
+     		       <td  valign=bottom> 
+                          &nbsp;<label id=TasksCell7 for=rbTaskSort1Asc>Ascending</label>
+                       </td>
+		    </tr>
+		    <tr>
+                       <td align=left valign=middle>
+		 	  <input type=RADIO id="rbTaskSort1Dsc" style="height:10px;" name=constraint1>
+		       </td>
+		       <td valign=bottom>
+			   &nbsp;<label id=TasksCell9 for=rbTaskSort1Dsc>Descending</label>
+                       </td>
+		    </tr>
+                 </table>
+	      </td><td>
+		 <table border=0 cellpadding=0 cellspacing=0>
+		    <tr>
+		       <td  nowrap>
+			  <div  class=sort style="width:1px;">
+			     &nbsp;&nbsp;<label id=TaskDivSort2 for=lbSort2>then by:</label>&nbsp;&nbsp;
+			  </div>
+                       </td>
+		       <td id=TasksCell6 colspan=2 >	
+                	  <select name="selShowSort2" id="lbSort2" onchange="SortHandler();">
+			     <option id=Sort20 selected value="~">(none)</option>
+			     <option id=Sort21 selected value="[Importance]">Importance</option>
+			     <option id=Sort22 value="[DueDate]">Due Date</option>
+			     <option id=Sort23 value="[CreationTime]">Creation Time</option>
+			     <option id=Sort24 value="[StartDate]">Start Date</option>
+			   </select>
+		        </td>
+		     </tr>
+		     <tr>
+                        <td rowspan=2>&nbsp;</td> 
+                    	<td  align=left valign=middle>
+			   <input type=RADIO id="rbTaskSort2Asc" style="height:10px;" name=constraint2>
+                    	</td>
+                    	<td valign=bottom>    
+                           &nbsp;<label id=TasksCell8  for=rbTaskSort2Asc>Ascending</label>
+                    	</td>
+ 	             </tr>
+		     <tr>
+                        <td  align=left valign=middle>
+			   <input type=RADIO id="rbTaskSort2Dsc" style="height:10px;" name=constraint2>
+                	</td>
+                	<td valign=bottom>
+                	   &nbsp;<label id=TasksCell10  for=rbTaskSort2Dsc>Descending</label>
+                    	</td>
+                     </tr>
+            	  </table>
+	      </td>
+	   </tr>
+	  </table>
+	</td>
+    </tr>
+    <tr><td class=borderBottom colspan=4 height=10px>&nbsp;</td></tr>
+
+
+	<tr>
+		<td width=14px>&nbsp;</td>
+		<td id=custom_align5 style="width:20%;height:45px;" align="left" valign=top>
+			<table border=0 >
+				<tr>
+					<td id=stylehdr width=64px height=32px class="component">
+						Styles 
+					</td>
+				</tr>
+			</table>
+		</td>
+		<td width=25px>&nbsp;</td>
+		<td id=idLocStylesAlign align=left >
+		    <table border=0  valign=top>
+			    <tr>
+				    <td align=left nowrap height=32px valign=bottom>
+				        <div style="margin-bottom:8px;width:1px;">
+				            <label id=stylediv  for=lbStyle>Show Outlook Today in this style:</label>
+                        </div>
+				    </td>
+				    <td rowspan=2 width=10px></td>
+				    <td nowrap>
+					    <select name="selStyle" id="lbStyle" onchange="SelectStyle(this.selectedIndex)">
+					    </select>
+				    </td>
+				    <td width=20></td>
+			    </tr>
+			    <tr>
+				    <td>&nbsp;</td>
+				    <td nowrap>
+					    <img width=120px height=80px border=1 style="border-color:gray;" id="imgStyle" align="top"> 
+				    </td>
+			    </tr>
+		    </table>
+		</td>
+
+	</tr>
+</table>
+
+<script language="JavaScript">
+
+/////////////////////////////////////////////////////////////////////
+// Assign Prefs to Controls Functions
+
+var straStyles = new Array();
+var gTaskFilter
+var gbStartupInitialState = false, gbStartupStateChanged = false
+
+// Gets Preferences from the registry and assigns them to the controls
+AssignPrefsCalendar()
+AssignPrefsTasks()
+AssignTaskSort1()
+AssignTaskSort2()
+AssignIncNoDueDate()
+AssignTaskSortOrder()
+AssignPrefsStyles();
+
+
+
+// Read Calendar prefs from the registry and assign them to the combo box
+function AssignPrefsCalendar()
+{
+	var	str = window.external.GetPref("CalDays");
+	if ( str )		// set the value of the combo box
+	{
+		lbShowCal.value = str;
+	}
+	else			// default to 5
+	{
+		lbShowCal.value = 5;
+	}
+}
+function TaskPrefsHandler()
+{
+    if(rbTaskAll.checked == true)
+        {
+            rbTaskIncludeNoDueDate.disabled = true;
+            rbTaskIncludeNoDueDate.checked = false;
+        }       
+    else
+        {
+            rbTaskIncludeNoDueDate.disabled = false;
+        }        
+    
+}
+function SortHandler()
+{
+    if( lbSort1.value == "~")
+        {
+            rbTaskSort1Asc.disabled = true;
+            rbTaskSort1Dsc.disabled = true;
+            lbSort2.disabled = true;
+            lbSort2.value = "~";			       
+        }
+    else
+        {
+            rbTaskSort1Asc.disabled = false;
+            rbTaskSort1Dsc.disabled = false;
+            lbSort2.disabled = false;
+        }		
+    if (lbSort2.value == "~")
+        {
+ 		    rbTaskSort2Asc.disabled = true;
+            rbTaskSort2Dsc.disabled = true;      
+        }
+    else
+        {
+ 		    rbTaskSort2Asc.disabled = false;
+            rbTaskSort2Dsc.disabled = false;       
+        }
+
+}
+ 
+function AssignTaskSort1()
+{
+	var	str = window.external.GetPref("Sort1");
+	if ( str )		// set the value of the combo box
+	{
+		lbSort1.value = str;
+	}
+	else
+	{
+		lbSort1.value = "[DueDate]";
+	}
+}
+
+function AssignTaskSort2()
+{
+	var	str = window.external.GetPref("Sort2");
+
+    if( lbSort1.value == "~")
+    {
+        rbTaskSort1Asc.disabled = true;
+        rbTaskSort1Dsc.disabled = true; 
+        lbSort2.disabled = true;
+        lbSort2.value = "~";			       
+    }
+    else
+    {
+
+	    if ( str )		// set the value of the combo box
+	    {
+
+		    lbSort2.value = str;
+	    }
+	    else
+	    {
+
+		    lbSort2.value = "~";
+	    }
+    }
+    if (lbSort2.value == "~")
+        {
+        		rbTaskSort2Asc.disabled = true;
+                rbTaskSort2Dsc.disabled = true;
+        }
+
+ }
+// Read Tasks prefs from the registry and assign them to the radio buttons
+function AssignPrefsTasks()
+{
+	var str = window.external.GetPref("TaskFilter")
+	if ( str )
+	{
+		gTaskFilter = str;
+	}
+	else			// default to "All"
+	{
+		gTaskFilter = "All";
+	}
+	
+	// Set Task radio buttons accordingly
+	switch ( gTaskFilter )
+	{
+		case "All":
+		{
+			rbTaskAll.checked = true;
+            rbTaskIncludeNoDueDate.disabled = true;
+            
+		}
+		break;
+		
+		case "Today":
+		{
+			rbTaskToday.checked = true;
+            rbTaskIncludeNoDueDate.disabled = false;
+		}
+		break;
+		
+		default:
+		{
+			gTaskFilter = "All";
+			rbTaskAll.checked = true;
+            rbTaskIncludeNoDueDate.disabled = true;
+		}
+
+	}
+}
+
+function AssignIncNoDueDate()
+{
+	var strIncNoDueDate = window.external.GetPref("IncNoDueDate");
+
+	switch ( strIncNoDueDate )
+	{
+		case "True":
+		{
+			rbTaskIncludeNoDueDate.checked = true;			
+		}
+		break;
+
+		case "False":
+		{
+			rbTaskIncludeNoDueDate.checked = false;			
+		}
+		break;
+
+		default:
+		{
+			rbTaskIncludeNoDueDate.checked = true;			
+		}
+	}
+}
+
+function AssignTaskSortOrder()
+{
+    var strSort1Asc = window.external.GetPref("Sort1Asc");
+	var strSort2Asc = window.external.GetPref("Sort2Asc");
+    
+	switch ( strSort1Asc )
+	{
+		case "True":
+		{
+			rbTaskSort1Asc.checked = true;
+            rbTaskSort1Dsc.checked = false;			
+		}
+		break;
+
+		case "False":
+		{
+			rbTaskSort1Asc.checked = false;
+            rbTaskSort1Dsc.checked = true;			
+		}
+		break;
+
+		default:
+		{
+			rbTaskSort1Asc.checked = false;
+            rbTaskSort1Dsc.checked = true;			
+		}
+	}
+
+	switch ( strSort2Asc )
+	{
+		case "True":
+		{
+			rbTaskSort2Asc.checked = true;
+            rbTaskSort2Dsc.checked = false;			
+		}
+		break;
+
+		case "False":
+		{
+			rbTaskSort2Asc.checked = false;
+            rbTaskSort2Dsc.checked = true;			
+		}
+		break;
+
+		default:
+		{
+			rbTaskSort2Asc.checked = false;
+            rbTaskSort2Dsc.checked = true;			
+		}
+	}
+}
+
+//===============  Begin styles   =============================
+// Get available styles from the registry and assign them to the combo
+function AssignPrefsStyles()
+{
+	var strName, strURL, strImg
+	var L_StylePlaceholder_Text = "style";		// this text is a placeholder if there is no style
+	var L_StyleName0_Text = "Standard";		// name in the registry.  each unnamed style will be
+	var L_StyleName1_Text = "Standard (two column)";		// called "style1", "style2", etc.												
+	var L_StyleName2_Text = "Standard (one column)";
+	var L_StyleName3_Text = "Summer";
+	var L_StyleName4_Text = "Winter";
+
+	// set the default style
+	straStyles[0] = new Object();
+	straStyles[1] = new Object();
+	straStyles[2] = new Object();
+	straStyles[3] = new Object();
+	straStyles[4] = new Object();
+
+
+
+	straStyles[0].Name = L_StyleName0_Text;
+	straStyles[1].Name = L_StyleName1_Text;
+	straStyles[2].Name = L_StyleName2_Text;
+	straStyles[3].Name = L_StyleName3_Text;
+	straStyles[4].Name = L_StyleName4_Text;
+
+
+	straStyles[0].URL = "outlook.htm";
+	straStyles[1].URL = "outlook1.htm";
+	straStyles[2].URL = "outlook2.htm";
+	straStyles[3].URL = "outlook3.htm";
+	straStyles[4].URL = "outlook4.htm";
+
+
+	straStyles[0].Img = "thumbnail0.gif";
+	straStyles[1].Img = "thumbnail1.gif";
+	straStyles[2].Img = "thumbnail2.gif";
+	straStyles[3].Img = "thumbnail3.gif";
+	straStyles[4].Img = "thumbnail4.gif";
+
+
+
+	//"res://outlwsty.dll/thumbnail4.gif";
+
+	var i
+	for ( i=0; i < 127; i++ )
+	{
+		// get the URL for this style
+		strName = strURL = strImg = null
+		strURL = window.external.GetPref( "Style" + i + "Url")
+		if ( strURL )			// if there is a style listed in the registry
+		{
+			// get the name for this Style
+			straStyles[i] = new Object();
+			straStyles[i].URL = strURL
+
+			// get the Name for this style
+			strName = window.external.GetPref( "Style" + i )
+			if ( strName )
+			{
+				straStyles[i].Name = strName
+			}
+			else
+			{
+				straStyles[i].Name = "<" + L_StylePlaceholder_Text + i + ">"
+			}
+
+			// get the thumbnail image for this style
+			strImg = window.external.GetPref( "Style" + i + "Img" )
+			if ( strImg )
+			{
+				straStyles[i].Img = strImg
+			}
+			else
+			{
+				straStyles[i].Img = null
+			}
+		}
+		else		// if this "Style[i]" is not listed in the registry 
+		{
+			if (i == 0)
+			{
+				// continue the for loop.  If there is no "Style0" in the registry, then we 
+				// respect the default settings defined above, and go on to look for "Style1"
+			}
+			else 
+			{
+				// we haven't found the next style, so we stop looking.
+				break;
+			}
+		}
+	}
+
+	// Fill the drop-down with available styles
+	var i, elOptionTemp
+	for ( i = 0; i < straStyles.length; i++ )
+	{
+		elOptionTemp = null
+		elOptionTemp = document.createElement( "OPTION" );
+		elOptionTemp.text = straStyles[i].Name;
+		elOptionTemp.value = "Style" + i
+		document.all.lbStyle.add( elOptionTemp )
+	}
+
+	//Assign the user's current style to the drop-down
+	var strStylePref = window.external.GetPref("Style")
+	if ( strStylePref )
+	{
+		lbStyle.value = strStylePref
+	}
+	else
+	{
+		lbStyle.value = "Style0"
+	}
+	SelectStyle( lbStyle.selectedIndex )
+}
+
+
+// Switches the thumbnail image when the user picks a new style
+function SelectStyle( iSelectedIndex )
+{
+	if ( (straStyles.length > 0) & (iSelectedIndex >= 0) )
+	{
+		imgStyle.src = straStyles[iSelectedIndex].Img
+		imgStyle.style.display = ""
+	}
+	else
+	{
+		imgStyle.src = ""
+		imgStyle.style.display = "none"
+	}
+}
+//===============  End styles   =============================
+
+// writes current prefs to the registry
+function WritePrefs()
+{
+
+	var str;
+	window.external.SetPref( "CalDays", lbShowCal.value );
+	window.external.SetPref( "TaskFilter", gTaskFilter );
+	window.external.Setpref( "Sort1", lbSort1.value );
+	window.external.Setpref( "Sort2", lbSort2.value );
+	
+	window.external.Setpref( "Style", lbStyle.value );
+	if (rbTaskIncludeNoDueDate.checked)
+	{
+		str = "True";
+	}
+	else
+	{
+		str = "False";
+	}
+	window.external.Setpref( "IncNoDueDate", str);
+
+	if (rbTaskSort1Asc.checked)
+	{
+		str = "True";
+	}
+	else
+	{
+		str = "False";
+	}
+	window.external.Setpref( "Sort1Asc", str);
+
+	if (rbTaskSort2Asc.checked)
+	{
+		str = "True";
+	}
+	else
+	{
+		str = "False";
+	}
+	window.external.Setpref( "Sort2Asc", str);
+
+	if ( lbStyle.selectedIndex >= 0 )
+	{
+		if (straStyles[ lbStyle.selectedIndex ].URL != "")
+		{
+			str = straStyles[ lbStyle.selectedIndex ].URL;
+			strReturnURL = "outlook:today?RelativeURL=" + str;
+			window.external.SetPref( "CustomUrl", str );
+		}
+	}
+}
+
+
+////////////////////////////////////////////////////////////////////////////////
+// Save Prefs and Exit functions
+
+// returns to Outlook Today without saving preferences
+function Cancel()
+{
+
+	// because the "startup" control is directly bound to the registry, 
+	// we need to undo it if it has been changed.
+
+	if ( gbStartupStateChanged)
+	{
+		cbStartup.checked = gbStartupInitialState;
+	}
+
+	window.document.location = strReturnURL;
+	window.event.returnValue=false;
+}
+
+// Record the initial state of the startup checkbox (it is automatically bound to the registry)
+function cbStartupClick()
+{
+	if ( ! gbStartupStateChanged )
+	{
+		gbStartupInitialState = !cbStartup.checked
+		gbStartupStateChanged = true
+	}
+}
+
+// writes preferences and returns to Outlook Today
+function GoBack()
+{
+	WritePrefs();
+	window.document.location = strReturnURL;
+}
+
+
+
+/////////////////////////////////////////////////////////////////////
+//Event Handling Functions
+
+document.onmouseover = rollOn
+document.onmouseout = rollOff
+
+function rollOn() {
+    var e;
+    e = window.event.srcElement;
+    switch ( e.className )
+    {
+
+		case 'link':
+		{
+			e.style.textDecorationUnderline = true;
+		}
+		break;
+	}
+	window.event.cancelBubble = true;
+}
+
+function rollOff() {
+    var e;
+    e = window.event.srcElement;
+    switch ( e.className )
+    {
+		case 'link':
+		{
+			e.style.textDecorationUnderline = false;
+		}
+		break;
+	}
+	window.event.cancelBubble = true;
+}
+
+// handles onmouseover and onmouseout for Save Changes and Cancel buttons  
+function OptionOn()
+{
+    var srcElement = window.event.srcElement;
+    var srcId = srcElement.id;
+    var newId = "btn" + srcId.substring(3, srcId.length);
+    var btnElement = document.all.item(newId);
+   
+    switch ( btnElement.className )
+	{
+		case 'button2':
+		{
+   			btnElement.className = "button2over";
+		}
+		break;
+	}   
+}
+
+
+function OptionOff()
+{
+    var srcElement = window.event.srcElement;
+    var srcId = srcElement.id;
+    var newId = "btn" + srcId.substring(3, srcId.length);
+
+   var btnElement = document.all.item(newId);
+ 
+    switch ( btnElement.className )
+	{
+		case 'button2over':
+		{
+   			btnElement.className = "button2";
+		}
+		break;
+	}   
+
+}
+
+function TestForGoBack()
+{
+	if(window.GoBack == null)
+	{
+		window.document.location=strReturnURL;
+	}
+	else
+	{
+		GoBack();
+	}
+	
+	window.event.returnValue=false;
+}
+
+function enableButtons()
+{
+
+	lnkSave.onclick=TestForGoBack;
+        lnkSave.onfocus=OptionOn;
+ 	lnkSave.onblur=OptionOff;
+        lnkSave.onmouseover=OptionOn;
+	lnkSave.onmouseout=OptionOff;
+
+	lnkCancel.onclick=Cancel;
+        lnkCancel.onfocus=OptionOn;
+ 	lnkCancel.onblur=OptionOff;
+        lnkCancel.onmouseover=OptionOn;
+	lnkCancel.onmouseout=OptionOff;
+}
+enableButtons();
+</script>
+
+
+</body>
+</html>

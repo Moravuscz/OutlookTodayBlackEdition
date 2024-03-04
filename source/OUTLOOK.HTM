@@ -1,0 +1,560 @@
+<!DOCTYPE html PUBLIC "-//IETF//DTD HTML//EN">
+
+<html>
+    <head>
+        <style>
+            a {
+                color: windowtext;
+            }
+
+            body {
+                margin-top: 0px;
+                margin-right: 0px;
+                margin-left: 0px;
+                background-color: #262626;
+            }
+
+            .CalendarSubjectLocation {
+            }
+
+            .CalendarStartEnd {
+            }
+
+            .InboxCount {
+                font-weight: bold;
+            }
+
+            .InboxCountZero {
+                font-weight: normal;
+            }
+
+            .DateAndOptionsBar {
+                border-bottom: 1px solid #c0c0c0;
+                background-color: #363636;
+            }
+
+            .options {
+                color: white;
+                font-family: Tahoma;
+                font-size: 8pt;
+                text-decoration: none;
+            }
+
+            .date {
+                margin-bottom: 4px;
+                color: white;
+                font-family: Arial;
+                font-size: 11pt;
+                font-weight: bold;
+            }
+
+            .itemNormal {
+                font-size: 8pt;
+                font-family: Tahoma;
+                text-decoration: none;
+                color: white;
+            }
+
+            .times {
+                font-size: 7pt;
+                line-height: 11pt;
+                font-family: Tahoma;
+                text-decoration: none;
+                cursor: hand;
+                color: buttonshadow;
+            }
+
+            .PastTimes {
+                color: buttonshadow;
+                line-height: 11pt;
+                font-size: 7pt;
+                text-decoration: none;
+                cursor: hand;
+            }
+            .SplitDayTimes {
+                color: #a7cdf0;
+                font-size: 7pt;
+                line-height: 11pt;
+                text-decoration: none;
+                cursor: hand;
+            }
+            .allDayEventTimes {
+                color: #a7cdf0;
+                line-height: 11pt;
+                font-size: 7pt;
+                text-decoration: none;
+                cursor: hand;
+            }
+            .TskDone {
+                font-size: 8pt;
+                color: gray;
+                text-decoration: line-through;
+            }
+
+            .itemImportant {
+                color: red;
+            }
+
+            .dayHeaders {
+                font-family: Tahoma;
+                font-size: 8pt;
+                font-weight: bold;
+                width: 100%;
+                height: 100%;
+                border-color: #cccccc;
+                border-width: 0.1em;
+                border-bottom-style: solid;
+                border-top-style: none;
+                border-right-style: none;
+                border-left-style: none;
+                color: white;
+                cursor: default;
+            }
+
+            .SplitDay {
+                font-size: 8pt;
+                font-family: Tahoma;
+                text-decoration: none;
+                color: #a7cdf0;
+            }
+
+            .allDayEvent {
+                font-size: 8pt;
+                font-family: Tahoma;
+                text-decoration: none;
+                color: #a7cdf0;
+            }
+
+            .ApptPast {
+                color: buttonshadow;
+            }
+
+            .Folder {
+                color: white;
+                font-family: Tahoma;
+                font-size: 8pt;
+                text-decoration: none;
+            }
+
+            .NextAppt {
+                font-family: Marlett;
+                font-size: 10pt;
+                line-height: 12pt;
+                font-weight: bold;
+                text-decoration: none;
+                color: darkred;
+            }
+
+            .OnGoing {
+                font-family: Marlett;
+                font-size: 10pt;
+                line-height: 12pt;
+                font-weight: bold;
+                text-decoration: none;
+                color: darkred;
+            }
+
+            .ImportanceIcon {
+                font-family: Symbol;
+                font-size: 11pt;
+                font-weight: bold;
+                text-decoration: none;
+                color: red;
+            }
+
+            TD {
+                font-family: tahoma;
+                font-size: 8pt;
+            }
+
+            .component {
+                background-color: #363636;
+                height: 16px;
+                color: white;
+                cursor: hand;
+                font-family: Tahoma;
+                font-size: 8pt;
+                font-weight: bold;
+            }
+            .componentLink {
+                text-decoration: none;
+                color: white;
+            }
+            .borderBottom {
+                border-color: #cccccc;
+                border-width: 0.1em;
+                border-bottom-style: solid;
+                border-top-style: none;
+                border-right-style: none;
+                border-left-style: none;
+            }
+            .borderRight {
+                border-right: rgb(192, 192, 192) 1px solid;
+                color: buttonface;
+            }
+
+            .button2 {
+                position: relative;
+                height: 100%;
+                text-decoration: none;
+                color: black;
+                font-weight: normal;
+                font-size: 8pt;
+                font-family: tahoma;
+                border: none;
+            }
+            .button2over {
+                position: relative;
+                height: 100%;
+                text-decoration: none;
+                color: black;
+                font-size: 8pt;
+                font-family: tahoma;
+                font-weight: normal;
+                border: none;
+            }
+            .button2down {
+                position: relative;
+                height: 100%;
+                font-family: tahoma;
+                font-size: 8pt;
+                text-decoration: none;
+                color: black;
+                font-weight: normal;
+                border: none;
+            }
+        </style>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+
+        <title>Outlook Today</title>
+
+        <!-- OUTLOOK OBJECTS FOR DATABINDING -->
+
+        <object id="CalList" classid="CLSID:0468C085-CA5B-11D0-AF08-00609797F0E0">
+            <param name="Module" value="Calendar" />
+        </object>
+
+        <object id="TaskList" classid="CLSID:0468C085-CA5B-11D0-AF08-00609797F0E0">
+            <param name="Module" value="Tasks" />
+        </object>
+
+        <object id="MailList" classid="CLSID:0468C085-CA5B-11D0-AF08-00609797F0E0">
+            <param name="Module" value="Inbox" />
+        </object>
+    </head>
+    <body>
+        <table border="0" cellpadding="0" cellspacing="0" width="100%" class="DateAndOptionsBar">
+            <tr>
+                <td height="28" nowrap valign="bottom">
+                    <div id="dateScript" class="date" style="margin-left: 16px; margin-right: 16px"></div>
+                </td>
+                <td id="outlook_align3" height="28" nowrap valign="bottom" align="right">
+                    <table border="0" cellpadding="1" id="topbuttons1" height="20px">
+                        <tr>
+                            <td valign="top">
+                                <div id="OptionsCell" class="button2" style="line-height: 13pt; width: 100%" onmousedown="OptionsCell.className ='button2down';" onmouseup="OptionsCell.className='button2over';">
+                                    <a id="GoToOptions" class="options" tabindex="1" href="outlook:today?RelativeURL=custom.htm" accesskey="u" onfocus="OptionsCell.className='button2over';" onblur="OptionsCell.className='button2';"> &nbsp;C<u>u</u>stomize&nbsp;Outlook&nbsp;Today&nbsp;...&nbsp; </a>
+                                </div>
+                            </td>
+                            <td width="4px">&nbsp;</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+
+        <table border="0" cellspacing="0" cellpadding="0" width="100%">
+            <tr>
+                <td colspan="9" width="12px">&nbsp;</td>
+            </tr>
+            <tr>
+                <!-- Calendar begins -->
+                <td valign="top" width="47%">
+                    <table cellpadding="2" cellspacing="0" border="0" width="100%">
+                        <tr>
+                            <td><div style="margin-left: 9px">&nbsp;</div></td>
+                            <td id="CellCalHdr" class="component" child="CalendarHeader" onclick="window.document.location.href='outlook:calendar';window.event.returnValue=false;" valign="bottom" width="100%" nowrap>&nbsp;<a id="CalendarHeader" href="outlook:calendar" onclick="window.event.cancelBubble=true;" class="componentLink">Calendar</a></td>
+                        </tr>
+                    </table>
+                    <br />
+                    <table id="CalendarLiveTable" border="0" cellspacing="1" cellpadding="2" valign="top" width="100%" name="ItemCol" datasrc="#CalList" style="display: none">
+                        <tr>
+                            <td nowrap valign="top" width="10px" align="left"><div datafld="Next" DATAFORMATAS="html"></div></td>
+                            <td valign="top" nowrap><div DATAFLD="StartEnd" DATAFORMATAS="html" class="CalendarStartEnd">&nbsp;</div></td>
+
+                            <td valign="top" width="100%"><div datafld="SubjectLocation" DATAFORMATAS="html" class="CalendarSubjectLocation">&nbsp;</div></td>
+                        </tr>
+                    </table>
+
+                    <table id="CalendarStaticTable" border="0" cellspacing="1" cellpadding="2" valign="top" width="100%">
+                        <!-- RENSTATICTABLE~Calendar~Next=nowrap valign=top width=10px align=left~StartEnd=valign=top nowrap ~SubjectLocation=valign=top width=100%~ -->
+                    </table>
+                </td>
+                <td width="12px" class="borderRight"><img src="gap.gif" width="12px" border="0" /></td>
+                <td width="12px"><img src="gap.gif" width="12px" border="0" /></td>
+                <!-- Tasks begins -->
+                <td valign="top" width="33%">
+                    <table cellpadding="2" cellspacing="0" width="100%">
+                        <tr>
+                            <td id="TaskHdrCell" class="component" child="TasksHeader" onclick="window.document.location.href='outlook:tasks';window.event.returnValue=false;" valign="bottom" width="100%" nowrap>&nbsp;<a id="TasksHeader" href="outlook:tasks" onclick="window.event.cancelBubble=true;" class="componentLink">Tasks</a></td>
+                        </tr>
+                    </table>
+                    <br />
+                    <table border="0" name="TaskCol" cellspacing="0" id="TasksLiveTable" datasrc="#TaskList" width="100%" style="display: none">
+                        <tbody>
+                            <tr>
+                                <td width="1px"><input type="checkbox" DATAFORMATAS="Text" DATAFLD="Complete" height="20px" /></td>
+                                <td width="1px"><div DATAFLD="Importance" DATAFORMATAS="html" class="TaskImportance"></div></td>
+                                <td><div DATAFLD="Subject" DATAFORMATAS="html" class="TaskSubject"></div></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <table border="0" id="TasksStaticTable" cellspacing="0" width="100%">
+                        <!-- RENSTATICTABLE~Tasks~!Complete=width=20px height=22px~Importance=width=1px~Subject=~ -->
+                    </table>
+                </td>
+                <td width="12px" class="borderRight"><img src="gap.gif" width="12px" border="0" /></td>
+                <td width="12px"><img src="gap.gif" width="12px" border="0" /><img src="gap.gif" width="12px" border="0" /></td>
+
+                <!-- Mail begins -->
+                <td valign="top" width="20%">
+                    <table cellpadding="2" cellspacing="0" width="100%">
+                        <tr>
+                            <td id="CellMail" class="component" child="MailHeader" onclick="window.document.location.href='outlook:inbox';window.event.returnValue=false;" valign="bottom" width="100%" nowrap>&nbsp;<a id="MailHeader" href="outlook:inbox" onclick="window.event.cancelBubble=true;" class="componentLink">Messages</a></td>
+                        </tr>
+                    </table>
+                    <br />
+                    <table border="0" name="MailCol" id="InboxLiveTable" datasrc="#MailList" cellspacing="0" width="100%" style="display: none">
+                        <tbody>
+                            <tr>
+                                <td id="folder_name" align="left" valign="top" class="borderBottom"><div DATAFLD="Name" DATAFORMATAS="html" class="Folder"></div></td>
+                                <td id="folder_count" nowrap valign="top" class="borderBottom" align="right"><div DATAFLD="Count" DATAFORMATAS="html" class="InboxCount"></div></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <table id="InboxStaticTable" border="0" cellspacing="0" width="100%">
+                        <!-- RENSTATICTABLE~Inbox~Name=align=left class=borderBottom valign=top~Count=class=borderBottom  align=right valign=top nowrap~ -->
+                    </table>
+                </td>
+                <td width="12px"><img src="gap.gif" width="12px" border="0" /></td>
+            </tr>
+        </table>
+
+        <!--
+  ------------------------------------------------------------------------
+							SCRIPT
+  ------------------------------------------------------------------------
+-->
+
+        <!-- This script block runs after the window has finished loading 
+	(and after the datasource controls have rendered themselves)
+	Thus it should be used for frosting that does not effect the
+	page's core functionality.  -->
+
+        <script defer for="window" event="onload" language="JavaScript">
+            ///////////////////////////////////////////////////////////////////////////
+            // Displays the date in the banner
+
+            document.all.dateScript.innerHTML = window.external.GetDate();
+
+            /////////////////////////////////////////////////////////////////////
+            //Event Handling Functions
+
+            document.onmouseover = rollOn;
+            document.onmouseout = rollOff;
+
+            function rollOn() {
+                var e;
+                var child;
+
+                e = window.event.srcElement;
+                child = document.all[e.getAttribute("child", false)];
+                switch (e.className) {
+                    case "options":
+                        {
+                            OptionsCell.className = "button2over";
+                        }
+                        break;
+
+                    case "itemNormal":
+                        {
+                            e.style.textDecorationUnderline = true;
+                        }
+                        break;
+
+                    case "allDayEvent":
+                        {
+                            e.style.textDecorationUnderline = true;
+                        }
+                        break;
+                    case "allDayEventTimes":
+                        {
+                            e.style.textDecorationUnderline = true;
+                        }
+                        break;
+                    case "times":
+                        {
+                            e.style.textDecorationUnderline = true;
+                        }
+                        break;
+
+                    case "ApptPast":
+                        {
+                            e.style.textDecorationUnderline = true;
+                        }
+                        break;
+
+                    case "PastTimes":
+                        {
+                            e.style.textDecorationUnderline = true;
+                        }
+                        break;
+
+                    case "itemImportant":
+                        {
+                            e.style.textDecorationUnderline = true;
+                        }
+                        break;
+
+                    case "TskDone":
+                        {
+                            e.style.textDecorationUnderline = true;
+                        }
+                        break;
+                    case "component":
+                        {
+                            child.style.textDecorationUnderline = true;
+                        }
+                        break;
+
+                    case "componentLink":
+                        {
+                            e.style.textDecorationUnderline = true;
+                        }
+                        break;
+
+                    case "link":
+                        {
+                            e.style.textDecorationUnderline = true;
+                        }
+                        break;
+                    case "SplitDay":
+                        {
+                            e.style.textDecorationUnderline = true;
+                        }
+                        break;
+                    case "SplitDayTimes":
+                        {
+                            e.style.textDecorationUnderline = true;
+                        }
+                        break;
+                    case "Folder":
+                        {
+                            e.style.textDecorationUnderline = true;
+                        }
+                        break;
+                }
+
+                window.event.cancelBubble = true;
+            }
+
+            function rollOff() {
+                var e;
+                var child;
+
+                e = window.event.srcElement;
+                child = document.all[e.getAttribute("child", false)];
+
+                switch (e.className) {
+                    case "options":
+                        {
+                            OptionsCell.className = "button2";
+                        }
+                        break;
+
+                    case "itemNormal":
+                        {
+                            e.style.textDecorationUnderline = false;
+                        }
+                        break;
+
+                    case "allDayEvent":
+                        {
+                            e.style.textDecorationUnderline = false;
+                        }
+                        break;
+                    case "allDayEventTimes":
+                        {
+                            e.style.textDecorationUnderline = false;
+                        }
+                        break;
+                    case "times":
+                        {
+                            e.style.textDecorationUnderline = false;
+                        }
+                        break;
+
+                    case "ApptPast":
+                        {
+                            e.style.textDecorationUnderline = false;
+                        }
+                        break;
+
+                    case "PastTimes":
+                        {
+                            e.style.textDecorationUnderline = false;
+                        }
+                        break;
+
+                    case "itemImportant":
+                        {
+                            e.style.textDecorationUnderline = false;
+                        }
+                        break;
+
+                    case "TskDone":
+                        {
+                            e.style.textDecorationUnderline = false;
+                        }
+                        break;
+                    case "component":
+                        {
+                            child.style.textDecorationUnderline = false;
+                        }
+                        break;
+                    case "componentLink":
+                        {
+                            e.style.textDecorationUnderline = false;
+                        }
+                        break;
+
+                    case "link":
+                        {
+                            e.style.textDecorationUnderline = false;
+                        }
+                        break;
+                    case "SplitDay":
+                        {
+                            e.style.textDecorationUnderline = false;
+                        }
+                        break;
+                    case "SplitDayTimes":
+                        {
+                            e.style.textDecorationUnderline = false;
+                        }
+                        break;
+                    case "Folder":
+                        {
+                            e.style.textDecorationUnderline = false;
+                        }
+                        break;
+                }
+
+                window.event.cancelBubble = true;
+            }
+        </script>
+    </body>
+</html>

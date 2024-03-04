@@ -1,0 +1,541 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+
+<html>
+<head>
+
+<style>
+
+a				{color:windowtext;}
+
+body			{background-color:white; margin-top:0px;margin-right:0px;margin-left:0px;}
+
+
+.CalendarSubjectLocation  		{margin-bottom:6px; } 
+
+.CalendarStartEnd  		{margin-bottom:6px; margin-right:8px; } 
+
+.InboxCount 			      {font-weight:bold;} 	
+				
+.InboxCountZero 			      {font-weight:normal;}
+
+.options		      {color:darkblue;font-family:Tahoma;font-size:8pt;text-decoration:none;}
+
+.date			      {color:darkslateblue; font-family:Tahoma;
+			            font-size:8pt; }
+
+.itemNormal 		{font-size:8pt;	font-family:Tahoma; text-decoration:none;color:windowtext; } 
+
+.times 			   {font-size:7pt; line-height:11pt; font-family:Tahoma; text-decoration:none; cursor:hand; color:gray;}
+
+.PastTimes 		   {color:silver; line-height:11pt; font-size:7pt; 
+				            text-decoration:none; cursor:hand; }
+.SplitDayTimes		   {color:steelblue; font-size:7pt; line-height:11pt;  
+				            text-decoration:none; cursor:hand; }
+.allDayEventTimes	   {color:steelblue; line-height:11pt; font-size:7pt;
+				            text-decoration:none; cursor:hand; }
+.TskDone		      {font-size:8pt;color:silver; text-decoration:line-through;} 
+
+.itemImportant 	{color:red} 
+
+.dayHeaders 		{font-family:Tahoma;font-size:8pt;font-weight:bold; letter-spacing:0.1em; text-transform:lowercase;
+			         width:100%; 
+		            border-color:lightsteelblue;
+			         border-width:1px;
+		            border-bottom-style:solid;
+		            border-top-style:none;		            border-right-style:none;
+		            border-left-style:none;
+			   color:darkslateblue;
+			   }
+
+.SplitDay		   {font-size:8pt; font-family:Tahoma; text-decoration:none;color:steelblue;}
+
+.allDayEvent 		{font-size:8pt;	font-family:Tahoma; text-decoration:none;color:steelblue;} 
+
+.ApptPast		   {color:silver; }   .InboxCount		   {margin-left:13px;}
+
+.Folder			   {color:windowtext; font-family:Tahoma;font-size:8pt;text-decoration:none; }
+
+.NextAppt	 	   {font-family:Marlett;font-size:10pt;line-height:12pt;font-weight:bold;
+				         text-decoration:none;color:indigo; }
+				
+.OnGoing		      {font-family:Marlett;font-size:10pt;line-height:12pt;font-weight:bold;
+				         text-decoration:none;color:indigo; }
+				
+.ImportanceIcon 	{font-family:Symbol;font-size:11pt;font-weight:bold;
+				         text-decoration:none;color:red; }
+
+.LowPrioIcon 		{font-family:Symbol;font-size:8pt; text-decoration:none;color:blue; }
+
+TD                {font-family:tahoma; font-size:8pt;}
+
+.component        {}
+.componentLink    { color:darkslateblue; font-size:12pt; font-family:arial; font-weight:bold; text-decoration:none; text-transform:lowercase; letter-spacing:0.3em; }
+.borderBottom     {
+		               border-color:lightsteelblue;
+		               border-width:.1em;
+		               border-bottom-style:solid;
+		               border-top-style:none;
+		               border-right-style:none;
+		               border-left-style:none;
+                  }
+.borderRight 		{ border-color:steelblue; border-width:1px; border-right-style:solid; }
+
+.button2         {
+         
+         		position:relative;
+			height:100%;
+			text-decoration:none;
+			color: white;
+			font-weight: normal;
+         		font-size: 8pt;
+			font-family:tahoma;
+		  	border-width:.1em;
+			border-style:solid;
+			border-bottom-color:window;
+			border-top-color:window;
+			border-right-color:window;
+			border-left-color:window;
+		}
+.button2over       {
+			position:relative;
+			height:100%;
+			text-decoration:none;
+			color: white;
+         		font-size: 8pt;
+			font-family:tahoma;
+			font-weight: normal;
+		   	border-width:.1em;
+		   	border-style:solid;
+			border-bottom-color:windowtext;
+			border-top-color:buttonface;
+			border-right-color:windowtext;
+			border-left-color:buttonface;
+
+		}
+.button2down       {
+			position:relative;
+			height:100%;
+			font-family:tahoma;
+			font-size:8pt;
+			text-decoration:none;
+			color: white;
+			font-weight: normal;
+			border-width:.1em;
+			border-style:solid;
+			border-bottom-color:buttonface;
+			border-top-color:windowtext;
+			border-right-color:buttonface;
+			border-left-color:windowtext;
+
+		}
+
+
+
+</STYLE>
+
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+
+<title>Outlook Today</title>
+
+<!-- OUTLOOK OBJECTS FOR DATABINDING -->
+
+<OBJECT ID="CalList" CLASSID="CLSID:0468C085-CA5B-11D0-AF08-00609797F0E0">
+<PARAM NAME="Module" VALUE="Calendar"></OBJECT>
+
+<OBJECT ID="TaskList" CLASSID="CLSID:0468C085-CA5B-11D0-AF08-00609797F0E0">
+<PARAM NAME="Module" VALUE="Tasks"></OBJECT>
+
+<OBJECT ID="MailList" CLASSID="CLSID:0468C085-CA5B-11D0-AF08-00609797F0E0">
+<PARAM NAME="Module" VALUE="Inbox"></OBJECT>
+
+</HEAD>
+<BODY>
+
+<!--
+<TABLE border=0 cellPadding=0 cellSpacing=0 width=100% bgcolor=#FFFF99>
+  <TR>
+      <td id=outlook4_align1 height=28 valign=top width=120px align=left>
+         <img id=outlook4_align2 src=clock.gif border=0 align=left valign=top hspace=0 vspace=0 height=30px> 
+      </td>
+      <TD height=28 noWrap valign=bottom>
+         
+      </TD>
+      <TD id=outlook4_align3 height=28 noWrap  vAlign=bottom align=right>
+	      
+	   </TD>
+	</TR>
+</TABLE>
+-->
+
+<table border=0 cellspacing=0 cellpadding=0 width=100% height=100%>
+<tr>
+	<td bgcolor=lightsteelblue height=12px style="border-color:steelblue; border-width:1px; border-bottom-style:none; ">
+		<table cellpadding=2 cellspacing=0 border=0 width=100%">
+	         	<tr>
+				<td>
+					<div style="margin-left:3px;">&nbsp;</div>
+				</td>
+		         	<td id=CellCalHdr class=component child=CalendarHeader 
+					onclick="window.document.location.href='outlook:calendar';window.event.returnValue=false;" 
+					valign=bottom width=100% nowrap>
+					&nbsp;
+					<a id=CalendarHeader href="outlook:calendar" onclick="window.event.cancelBubble=true;" class=componentLink>Calendar</a>
+				</td>
+				<td align=right nowrap>
+					<div id=dateScript class=date></div>
+				</td>
+			</tr>
+		</table>
+	</td>
+	<td bgcolor=lightsteelblue 
+		style="border-color:steelblue;
+			border-width:1px;
+			border-bottom-style:none;
+			border-top-style:none;
+			border-right-style:solid;
+			border-left-style:none;" >&nbsp;
+	</td>
+	
+	<td bgcolor=lightsteelblue>
+		<table  cellpadding=2 cellspacing=0 width=100% border=0>
+			<TR>
+				<td nowrap>&nbsp;&nbsp;</td><TD id=TaskHdrCell class=component child=TasksHeader 
+					onclick="window.document.location.href='outlook:tasks';window.event.returnValue=false;"
+					vAlign=bottom width=100% nowrap>
+					<a id=TasksHeader href="outlook:tasks" onclick="window.event.cancelBubble=true;" class=componentLink>Tasks</a>
+				</TD>
+			</tr>
+		</table>
+	</td>
+</tr>
+<tr>
+      <!-- Calendar begins -->
+      <td valign=top width=60%>
+	      
+      <br>	
+	   <table id=CalendarLiveTable border=0 cellspacing=0 cellpadding=0 valign=top width=100% name="ItemCol" datasrc="#CalList" style="margin-left:5px; display:none;">
+		   <tr>
+	           
+		      <td nowrap valign=top width=10px align=left><div datafld="Next" DATAFORMATAS="html"></DIV></TD>
+				   <td valign=top nowrap><DIV DATAFLD="StartEnd" DATAFORMATAS="html" class=CalendarStartEnd>&nbsp;</DIV></TD>
+               	       			
+				   <td valign=top width=100%><div datafld="SubjectLocation" DATAFORMATAS="html" class=CalendarSubjectLocation>&nbsp;</DIV></TD>
+               
+			   </tr>
+	   </table>
+	
+		<TABLE id=CalendarStaticTable border=0 cellspacing=0 cellpadding=0 valign=top width=100% style="margin-left:5px;">
+			<!-- RENSTATICTABLE~Calendar~Next=nowrap valign=top width=10px align=left~StartEnd=valign=top nowrap ~SubjectLocation=valign=top width=100%~ -->
+		</table><p>
+       
+      </td>
+      <td width=19px class=borderRight>&nbsp;</td>
+       
+     <!-- Mail begins -->
+      <td valign=top>
+
+	      
+         <br>
+		   <TABLE border=0 name="TaskCol" cellspacing=0 id=TasksLiveTable datasrc="#TaskList" width=95% style="margin-left:8px; display:none;">
+			   <TBODY>	
+			    <TR>
+			    	<TD width=1px><INPUT TYPE=checkbox DATAFORMATAS="Text" DATAFLD="Complete" height=22px></TD>
+				   <TD width=1px><DIV DATAFLD="Importance" DATAFORMATAS="html" class=TaskImportance></DIV></TD>
+				   <TD><DIV DATAFLD="Subject" DATAFORMATAS="html" class=TaskSubject></DIV></TD>    
+			 	  </TR>
+			   </TBODY>
+		   </TABLE>
+
+		<table border=0 id=TasksStaticTable cellspacing=0 width=95% style="margin-left:8px;">
+			<!-- RENSTATICTABLE~Tasks~!Complete=width=20px height=24px~Importance=width=1px~Subject=~ -->
+		</table>
+
+
+      <p><table border=0 bgcolor=lightsteelblue cellpadding=2 cellspacing=0 width=100%>
+	         <TR>
+		  <td nowrap>&nbsp;&nbsp;</td><TD id=CellMail class=component child=MailHeader
+			onclick="window.document.location.href='outlook:inbox';window.event.returnValue=false;" 
+			vAlign=bottom width=100% nowrap>
+		        <a id=MailHeader href="outlook:inbox" onclick="window.event.cancelBubble=true;" class=componentLink>Messages</a>
+	            </TD>
+            </tr>
+         </table>
+         <br>
+	      <table border=0 width=90% name="MailCol" id=InboxLiveTable datasrc="#MailList" cellspacing=0 
+				style="margin-left:12px; display:none;">
+	         <tbody>	
+			      <tr>
+				      <td id=folder_name align=left valign=top class=borderBottom><DIV  DATAFLD="Name" DATAFORMATAS="html" class=Folder></DIV></td>
+				      <td id=folder_count nowrap valign=top class=borderBottom align=right><DIV DATAFLD="Count" DATAFORMATAS="html" class=InboxCount></DIV></td>    
+			      </tr>
+		      </tbody>
+	      </table>
+
+	      <table id=InboxStaticTable border=0 width=90% cellspacing=0 style="margin-left:12px;">
+		      <!-- RENSTATICTABLE~Inbox~Name=align=left class=borderBottom valign=top~Count=class=borderBottom  align=right valign=top nowrap~ -->
+	      </table><p>&nbsp;
+
+
+
+	      </td>
+      
+        
+  </tr>
+  <tr>
+	<td colspan=2 style="border-color:steelblue; border-width:1px; border-right-style:solid;">&nbsp;</td>
+<td align=left valign=bottom style="border-color:steelblue; border-width:1px; border-top-style:solid;border-bottom-style:solid;">
+	<table border=0 cellpadding=1 id=topbuttons1 height=20px>
+	   <tr>
+	     <td valign=top>
+	      <div id=OptionsCell class=button2 style="line-height:13pt;width:100%;"
+		         onmousedown="OptionsCell.className ='button2down';"
+		         onmouseup="OptionsCell.className='button2over';">
+		
+		      <a id="GoToOptions"  class=options href="outlook:today?RelativeURL=custom.htm"
+			accesskey=u
+     		        onfocus="OptionsCell.className='button2over';"
+			onblur="OptionsCell.className='button2';">
+			   &nbsp;C<U>u</U>stomize&nbsp;Outlook&nbsp;Today&nbsp;...&nbsp; 
+		     </a>
+		
+             </div>
+		</td>
+		<td width=4px>&nbsp;</td>
+		</tr>
+		</table>
+
+<!-- <div id=OptionsCell style='margin-top:4px;margin-bottom:4px;margin-left:6px;'><a id="GoToOptions"  class=options tabindex=1 href="outlook:today?RelativeURL=custom.htm">Customize Outlook Today...</a></div> -->
+
+</td>
+  </tr>
+</table>
+
+<!--
+  ------------------------------------------------------------------------
+							SCRIPT
+  ------------------------------------------------------------------------
+-->
+
+<!-- This script block runs after the window has finished loading 
+	(and after the datasource controls have rendered themselves)
+	Thus it should be used for frosting that does not effect the
+	page's core functionality.  -->
+
+	
+<script defer for=window event=onload language="JavaScript">
+
+///////////////////////////////////////////////////////////////////////////
+// Displays the date in the banner
+
+document.all.dateScript.innerHTML = window.external.GetDate();
+
+
+/////////////////////////////////////////////////////////////////////
+//Event Handling Functions
+
+document.onmouseover = rollOn
+document.onmouseout = rollOff
+
+function rollOn() {
+    var e;
+    var child;
+ 
+   e = window.event.srcElement;
+   child = document.all[e.getAttribute("child", false)];      
+    switch ( e.className )
+    {
+		case 'options':
+		{
+			OptionsCell.className = "button2over";
+		}
+		break;
+
+		case 'itemNormal':
+		{
+			e.style.textDecorationUnderline = true;
+		}
+		break;
+
+		case 'allDayEvent':
+		{
+			e.style.textDecorationUnderline = true;
+		}
+		break;
+		case 'allDayEventTimes':
+		{
+			e.style.textDecorationUnderline = true;
+		}
+		break;
+		case 'times':
+		{
+			e.style.textDecorationUnderline = true;
+		}
+		break;
+
+		case 'ApptPast':
+		{
+			e.style.textDecorationUnderline = true;
+		}
+		break;
+
+		case 'PastTimes':
+		{
+			e.style.textDecorationUnderline = true;
+		}
+		break;
+
+		case 'itemImportant':
+		{
+			e.style.textDecorationUnderline = true;
+		}
+		break;
+
+		case 'TskDone':
+		{
+			e.style.textDecorationUnderline = true;
+		}
+		break;
+		case 'component':
+		{
+			child.style.textDecorationUnderline = true;
+			
+		}
+		break;
+
+		case 'componentLink':
+		{
+			e.style.textDecorationUnderline = true;
+		}
+		break;
+
+		case 'link':
+		{
+			e.style.textDecorationUnderline = true;
+		}
+		break;
+		case 'SplitDay':
+		{
+			e.style.textDecorationUnderline = true;
+		}
+		break;
+		case 'SplitDayTimes':
+		{
+			e.style.textDecorationUnderline = true;
+		}
+		break;
+		case 'Folder':
+		{
+			e.style.textDecorationUnderline = true;
+		}
+		break;
+	}
+	
+
+	window.event.cancelBubble = true;
+}
+
+function rollOff() {
+    var e;
+    var child;
+ 
+   e = window.event.srcElement;
+   child = document.all[e.getAttribute("child", false)];     
+
+    switch ( e.className )
+    {
+		case 'options':
+		{
+			OptionsCell.className = "button2";
+		}
+		break;
+
+		case 'itemNormal':
+		{
+			e.style.textDecorationUnderline = false;
+		}
+		break;
+
+		case 'allDayEvent':
+		{
+			e.style.textDecorationUnderline = false;
+		}
+		break;
+		case 'allDayEventTimes':
+		{
+			e.style.textDecorationUnderline = false;
+		}
+		break;
+		case 'times':
+		{
+			e.style.textDecorationUnderline = false;
+		}
+		break;
+
+		case 'ApptPast':
+		{
+			e.style.textDecorationUnderline = false;
+		}
+		break;
+
+		case 'PastTimes':
+		{
+			e.style.textDecorationUnderline = false;
+		}
+		break;
+
+		case 'itemImportant':
+		{
+			e.style.textDecorationUnderline = false;
+		}
+		break;
+
+		case 'TskDone':
+		{
+			e.style.textDecorationUnderline = false;
+		}
+		break;
+		case 'component':
+		{
+			child.style.textDecorationUnderline = false;
+		}
+		break;
+		case 'componentLink':
+		{
+			e.style.textDecorationUnderline = false;
+		}
+		break;
+
+		case 'link':
+		{
+			e.style.textDecorationUnderline = false;
+		}
+		break;
+		case 'SplitDay':
+		{
+			e.style.textDecorationUnderline = false;
+		}
+		break;
+		case 'SplitDayTimes':
+		{
+			e.style.textDecorationUnderline = false;
+		}
+		break;
+		case 'Folder':
+		{
+			e.style.textDecorationUnderline = false;
+		}
+		break;
+
+	}
+	
+	window.event.cancelBubble = true;
+}
+
+
+</script>
+
+
+
+</body>
+
+</html>
